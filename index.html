@@ -5,7 +5,6 @@
     <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
     <script type="text/javascript" src="bower_components/URIjs/src/URI.js"></script>
     <script type="text/javascript" src="bower_components/jquery/jquery.js"></script>
-    <script type="text/javascript" src="bower_components/less.js/dist/less-1.4.1.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript">
         $(function() {
@@ -13,10 +12,25 @@
         });
     </script>
     <script type="text/html" id="editor">
-        <textarea style="width: 600px; height: 400px;"><%=content%></textarea>
-        <div><button>Test</button></div>
-        <div><a href="display.html#"></a></div>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <h1 class="text-center">Linkier</h1>
+                </div>
+                <div class="span12">
+                    <textarea class="js_content input-block-level" style="height: 400px;"><%=content%></textarea>
+                </div>
+                <div class="span12 text-center">
+                    <button class="js_publish_content btn btn-primary btn-large">Test</button>
+                </div>
+                <div class="span12 text-center">
+                    <a class="js_link" style="overflow: hidden; text-overflow: ellipsis; max-width: 500px; display: inline-block" href="display.html#"></a>
+                </div>
+            </div>
+        </div>
     </script>
+    <link rel="stylesheet/less" type="text/css" href="style.less" />
+    <script type="text/javascript" src="bower_components/less.js/dist/less-1.4.1.js"></script>
 </head>
 <body>
 </body>

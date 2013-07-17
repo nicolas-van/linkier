@@ -26,11 +26,11 @@
 
     var editor = function() {
         $("body").html(_.template($("#editor").html(), {content: content}));
-        $("button").click(function() {
-            content = $("textarea").val();
+        $(".js_publish_content").click(function() {
+            content = $(".js_content").val();
             var val = JSON.stringify({body:content})
             var url = "" + new URI().fragment(URI.encode(val));
-            $("a").attr("href", url).text(url);
+            $(".js_link").attr("href", url).text(url);
         });
     };
 
