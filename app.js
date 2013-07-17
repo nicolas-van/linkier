@@ -4,7 +4,6 @@
     window.app = app;
 
     var state = null;
-    var content = "";
 
     app.main = function() {
         $(window).bind("hashchange", init);
@@ -12,12 +11,12 @@
     };
 
     var init = function() {
-        var hash = URI.decode(new URI().fragment()) || "null";
+        var hash = Base64.decode(URI.decode(new URI().fragment())) || "{}";
         state = JSON.parse(hash);
-        if (state) {    
-            _.defaults(state, {
-                body: "",
-            });
+        _.defaults(state, {
+            body: ""
+        });
+        if (state.body) {
             writeContent();
         } else {
             editor();
@@ -25,17 +24,22 @@
     };
 
     var editor = function() {
-        $("body").html(_.template($("#editor").html(), {content: content}));
+        $("body").html(_.template($("#editor").html(), {content: state.body}));
         $(".js_publish_content").click(function() {
-            content = $(".js_content").val();
-            var val = JSON.stringify({body:content})
+            state.body = $(".js_content").val();
+            var val = Base64.encode(JSON.stringify({body:state.body}));
             var url = "" + new URI().fragment(URI.encode(val));
             $(".js_link").attr("href", url).text(url).css("visibility", "visible");
         });
     };
 
     var writeContent = function() {
-        $("body").html(state.body);
+        $("body").html("");
+        $("body").append(_.template($("#edit_button").html()));
+        $(".js_edit_button").click(function() {
+            editor();
+        });
+        $("body").append(state.body);
     };
 
 })();
