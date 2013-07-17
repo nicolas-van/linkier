@@ -7,7 +7,7 @@
         $("button").click(function() {
             var val = $("textarea").val();
             val = JSON.stringify({body:val})
-            var url = "" + new URI("display.html").hash(val);
+            var url = "" + new URI("http://nicolas-van.github.io/linkier/display.html").hash(val);
             $("a").attr("href", url);
         });
     };
