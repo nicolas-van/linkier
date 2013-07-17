@@ -3,21 +3,38 @@
     var app = {};
     window.app = app;
 
-    app.writer = function() {
+    var state = null;
+    var content = "";
+
+    app.main = function() {
+        $(window).bind("hashchange", init);
+        init();
+    };
+
+    var init = function() {
+        var hash = URI.decode(new URI().fragment()) || "null";
+        state = JSON.parse(hash);
+        if (state) {    
+            _.defaults(state, {
+                body: "",
+            });
+            writeContent();
+        } else {
+            editor();
+        }
+    };
+
+    var editor = function() {
+        $("body").html(_.template($("#editor").html(), {content: content}));
         $("button").click(function() {
-            var val = $("textarea").val();
-            val = JSON.stringify({body:val})
-            var url = "" + new URI().filename("display.html").fragment(URI.encode(val));
-            $("a").attr("href", url);
+            content = $("textarea").val();
+            var val = JSON.stringify({body:content})
+            var url = "" + new URI().fragment(URI.encode(val));
+            $("a").attr("href", url).text(url);
         });
     };
 
-    app.display = function() {
-        var hash = URI.decode(new URI().fragment()) || "{}";
-        state = JSON.parse(hash);
-        _.defaults(state, {
-            body: "",
-        });
+    var writeContent = function() {
         $("body").html(state.body);
     };
 
