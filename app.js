@@ -7,13 +7,13 @@
         $("button").click(function() {
             var val = $("textarea").val();
             val = JSON.stringify({body:val})
-            var url = "" + new URI("http://nicolas-van.github.io/linkier/display.html").fragment(val);
+            var url = "" + new URI("http://nicolas-van.github.io/linkier/display.html").fragment(escape(val));
             $("a").attr("href", url);
         });
     };
 
     app.display = function() {
-        var hash = new URI().fragment() || "{}";
+        var hash = unescape(new URI().fragment() || "{}");
         state = JSON.parse(hash);
         _.defaults(state, {
             body: "",
