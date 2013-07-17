@@ -30,7 +30,7 @@
             content = $(".js_content").val();
             var val = JSON.stringify({body:content})
             var url = "" + new URI().fragment(URI.encode(val));
-            $(".js_link").attr("href", url).text(url);
+            $(".js_link").attr("href", url).text(url).css("visibility", "visible");
         });
     };
 
