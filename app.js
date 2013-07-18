@@ -36,6 +36,11 @@
             var url = "" + new URI().fragment(URI.encode(val));
             $(".js_link").attr("href", url).text(url).css("visibility", "visible");
         });
+        $(".js_link").click(function() {
+            if ("" + new URI() === $(".js_link").attr("href")) {
+                window.location.reload();
+            }
+        });
     };
 
     var writeContent = function() {
