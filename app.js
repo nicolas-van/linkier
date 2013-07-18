@@ -25,8 +25,11 @@
 
     var editor = function() {
         $("body").html(_.template($("#editor").html(), {content: state.body}));
+        $(".js_content").attr("id", _.uniqueId());
+        var editor = ace.edit($(".js_content").attr("id"));
+        editor.setValue(state.body);
         $(".js_publish_content").click(function() {
-            state.body = $(".js_content").val();
+            state.body = editor.getValue();
             var val = Base64.encode(JSON.stringify({body:state.body}));
             var url = "" + new URI().fragment(URI.encode(val));
             $(".js_link").attr("href", url).text(url).css("visibility", "visible");
