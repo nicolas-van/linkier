@@ -5,14 +5,31 @@
 
     var state = null;
 
+    var methods = {
+        "z": {
+            encode: function(obj) {
+                return URI.encode(Base64.encode(JSON.stringify(obj)));
+            },
+            decode: function(str) {
+                var hash = Base64.decode(URI.decode(str)) || "{}";
+                return JSON.parse(hash);
+            },
+        },
+    };
+
     app.main = function() {
         $(window).bind("hashchange", init);
         init();
     };
 
     var init = function() {
-        var hash = Base64.decode(URI.decode(new URI().fragment())) || "{}";
-        state = JSON.parse(hash);
+        state = {};
+        var fragment = new URI().fragment() || "";
+        if (fragment) {
+            var type = fragment[0];
+            fragment = fragment.slice(1);
+            state = methods[type].decode(fragment);
+        }
         _.defaults(state, {
             body: ""
         });
@@ -32,8 +49,7 @@
         editor.clearSelection();
         $(".js_publish_content").click(function() {
             state.body = editor.getValue();
-            var val = Base64.encode(JSON.stringify({body:state.body}));
-            var url = "" + new URI().fragment(URI.encode(val));
+            var url = "" + new URI().fragment("z" + methods.z.encode(state));
             $(".js_link").attr("href", url).text(url).css("visibility", "visible");
         });
         $(".js_link").click(function() {
