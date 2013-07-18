@@ -8,11 +8,10 @@
     var methods = {
         "z": {
             encode: function(obj) {
-                return URI.encode(Base64.encode(JSON.stringify(obj)));
+                return URI.encode(LZString.compressToBase64(JSON.stringify(obj)));
             },
             decode: function(str) {
-                var hash = Base64.decode(URI.decode(str)) || "{}";
-                return JSON.parse(hash);
+                return JSON.parse(LZString.decompressFromBase64(URI.decode(str)));
             },
         },
     };

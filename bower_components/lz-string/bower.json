@@ -1,0 +1,9 @@
+{
+  "name": "lz-string",
+  "version": "0.0.0",
+  "commit": "9b8e6aab8cee1b7091e01c98d253734b6726704f",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pieroxy/lz-string.git"
+  }
+}
