@@ -1,6 +1,7 @@
 
 (function() {
-    var app = {};
+    x = "hello";
+    console.log(x);
     window.app = app;
 
     var state = null;
