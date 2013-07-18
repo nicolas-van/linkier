@@ -28,6 +28,8 @@
         $(".js_content").attr("id", _.uniqueId());
         var editor = ace.edit($(".js_content").attr("id"));
         editor.setValue(state.body);
+        editor.getSession().setMode("ace/mode/javascript");
+        editor.clearSelection();
         $(".js_publish_content").click(function() {
             state.body = editor.getValue();
             var val = Base64.encode(JSON.stringify({body:state.body}));
