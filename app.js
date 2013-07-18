@@ -28,7 +28,7 @@
         $(".js_content").attr("id", _.uniqueId());
         var editor = ace.edit($(".js_content").attr("id"));
         editor.setValue(state.body);
-        editor.getSession().setMode("ace/mode/javascript");
+        editor.getSession().setMode("ace/mode/html");
         editor.clearSelection();
         $(".js_publish_content").click(function() {
             state.body = editor.getValue();
