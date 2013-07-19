@@ -19,8 +19,6 @@ module.exports = function(grunt) {
     },
     jshint: {
       files: ['app.js'],
-      options: {
-      }
     }
   });
 
