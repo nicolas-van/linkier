@@ -1,0 +1,21 @@
+{
+  "name": "linkier",
+  "version": "1.0.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "uri.js": "~1.10.2",
+    "ace": "~1.1.1",
+    "bootstrap": "~2.3.2",
+    "jquery": "~2.0.3",
+    "js-base64": "~2.1.2",
+    "less.js": "~1.4.2",
+    "lz-string": "https://github.com/pieroxy/lz-string.git",
+    "underscore": "~1.5.1"
+  }
+}
