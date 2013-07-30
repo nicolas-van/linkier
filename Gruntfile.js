@@ -7,6 +7,7 @@ module.exports = function(grunt) {
     "bower_components/bootstrap/bootstrap/js/bootstrap.js",
     "bower_components/lz-string/libs/lz-string-1.3.0.js",
     "bower_components/ace/build/src/ace.js",
+    "bower_components/ace/build/src/mode-html.js",
     "app.js",
   ];
 
@@ -110,6 +111,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint']);
 
   grunt.registerTask('dev', ['less', 'consolidate:dev']);
+  grunt.registerTask('watcher', ['dev', 'watch']);
 
   grunt.registerTask('dist', ['test', 'less', 'concat', 'uglify', "cssmin", "consolidate:dist", "htmlmin", "clean:tmp"]);
 
