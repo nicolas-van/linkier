@@ -68,15 +68,6 @@ module.exports = function(grunt) {
         tasks: ['consolidate:dev']
       },
     },
-    concat: {
-      options: {
-        separator: ';'
-      },
-      dist: {
-        src: jsfiles,
-        dest: 'app-concat.js'
-      }
-    },
     uglify: {
       dist: {
         options: {
@@ -84,15 +75,15 @@ module.exports = function(grunt) {
           sourceMappingURL: 'app-source-map.js',
         },
         files: {
-          'dist/app.min.js': ['app-concat.js']
+          'dist/app.min.js': jsfiles,
         }
       }
     },
     copy: {
       dist: {
-        files: {
-          "dist/app-concat.js": "app-concat.js",
-        },
+        files: [{
+          src: jsfiles, dest: "dist/",
+        }],
       }
     },
     cssmin: {
@@ -115,7 +106,7 @@ module.exports = function(grunt) {
     },
     clean: {
       tmp: {
-        src: ["app-concat.js", "index.tmp.html"]
+        src: ["index.tmp.html"]
       }
     }
   });
@@ -128,7 +119,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['less', 'consolidate:dev']);
   grunt.registerTask('watcher', ['dev', 'watch']);
 
-  grunt.registerTask('dist', ['test', 'less', 'concat', 'uglify', 'copy', "cssmin", "consolidate:dist", "htmlmin", "clean:tmp"]);
+  grunt.registerTask('dist', ['test', 'less', 'uglify', 'copy', "cssmin", "consolidate:dist", "htmlmin", "clean:tmp"]);
 
   grunt.registerTask('default', ['dev']);
 
