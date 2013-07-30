@@ -79,9 +79,20 @@ module.exports = function(grunt) {
     },
     uglify: {
       dist: {
+        options: {
+          sourceMap: 'dist/app-source-map.js',
+          sourceMappingURL: 'app-source-map.js',
+        },
         files: {
           'dist/app.min.js': ['app-concat.js']
         }
+      }
+    },
+    copy: {
+      dist: {
+        files: {
+          "dist/app-concat.js": "app-concat.js",
+        },
       }
     },
     cssmin: {
@@ -117,7 +128,7 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', ['less', 'consolidate:dev']);
   grunt.registerTask('watcher', ['dev', 'watch']);
 
-  grunt.registerTask('dist', ['test', 'less', 'concat', 'uglify', "cssmin", "consolidate:dist", "htmlmin", "clean:tmp"]);
+  grunt.registerTask('dist', ['test', 'less', 'concat', 'uglify', 'copy', "cssmin", "consolidate:dist", "htmlmin", "clean:tmp"]);
 
   grunt.registerTask('default', ['dev']);
 
