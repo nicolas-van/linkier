@@ -93,6 +93,10 @@ module.exports = function(grunt) {
     },
     htmlmin: {
       dist: {
+        options: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
         files: {
           'dist/index.html': "index.tmp.html",
         }
